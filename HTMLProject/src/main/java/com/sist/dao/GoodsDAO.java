@@ -38,7 +38,6 @@ public class GoodsDAO
 		   dao=new GoodsDAO();
 	   return dao;
    }
-   
    // 기능 설정
    // 상품 목록 출력
    public List<GoodsVO> goodsListData(int page)
