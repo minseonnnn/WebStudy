@@ -1,0 +1,57 @@
+<!--
+	지정된 영역을 벗어나는 경우 
+   => hidden / scroll
+-->
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	body > div{
+		width: 400px;
+		height: 100px;
+		position: relative;
+		border: 2px solid black;
+		/*overflow: hidden;*/
+		overflow-y: scroll;
+	}
+	.d{
+		width: 100px;
+		height: 100px;
+		position: absolute;
+	}
+	.a{
+		background-color: indianred;
+		left: 10px;
+		top: 10px;
+		z-index: 100;
+	}
+	.b{
+		background-color: lightseagreen;
+		left: 50px;
+		top: 50px;
+		z-index: 10;
+	}
+	.c{
+		background-color: steelblue;
+		left: 90px;
+		top: 90px;
+		z-index: 1;
+	}
+</style>
+</head>
+<body>
+  <h1>
+	  프로에서 뽐낸 존재감..SSG의 겁 없는 신인들
+  </h1>
+  <div>
+    <div class="a d"></div>
+    <div class="b d"></div>
+    <div class="c d"></div>
+  </div>
+  <h1>
+	  팀 분위기 잔뜩 흐리더니 먼저 결별 발표까지
+  </h1>
+</body>
+</html>
