@@ -49,7 +49,7 @@
 				</tr>
 				<tr>
 					<td colspan="2" class="text-right">
-					<input type=button value="찜하기" class="btn-xs btn-primary"> 
+					<input type=button value="장바구니" class="btn-xs btn-primary"> 
 					<input type=button value="좋아요" class="btn-xs btn-success"> 
 					<input type=button value="구매" class="btn-xs btn-info"> 
 					<input type=button value="목록" class="btn-xs btn-warning"
