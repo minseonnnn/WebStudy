@@ -12,7 +12,6 @@
 	
 	GoodsDAO dao=GoodsDAO.newInstance();
 	List<GoodsVO> list=dao.goodsListData(Integer.parseInt(type),curpage);
-	
 	int totalpage=dao.goodsListTotalPage(Integer.parseInt(type));
 	
 	final int BLOCK=10;
@@ -55,9 +54,9 @@
     <div style="height: 20px"></div>
    <div class="row">
       <%
-      for(GoodsVO vo:list)
-      {
-      %>
+        for(GoodsVO vo:list)
+        {
+     %>
 	      <div class="col-sm-3">
 	       <a href="goods_detail.jsp?no=<%=vo.getNo()%>&type=<%=type%>">
 	        <div class="thumbnail">
@@ -66,9 +65,9 @@
 	        </div>
 	       </a>
 	      </div>
-      <%
-         }
-      %>
+    <%
+        }
+    %>
 </div>
    <div style="height: 20px"></div>
     <div class="row">

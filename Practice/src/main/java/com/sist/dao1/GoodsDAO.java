@@ -88,7 +88,7 @@ public class GoodsDAO {
 		   try
 		   {
 			   conn=dbConn.getConnection();
-			   String sql="UPDATE goods_all SET "
+			   String sql="UPDATE "+tabs[type]+ " SET "
 					     +"hit=hit+1 "
 					     +"WHERE no=?";
 			   ps=conn.prepareStatement(sql);
@@ -96,8 +96,8 @@ public class GoodsDAO {
 			   ps.executeUpdate();
 			   
 			   sql="SELECT no,goods_discount,goods_first_price,goods_name,goods_sub,goods_price,goods_delivery,goods_poster "
-				  +"FROM goods_all "	   
-			      +"WHERE no=?";
+				  +"FROM " + tabs[type]   
+			      +" WHERE no=?";
 			   
 			   ps=conn.prepareStatement(sql);
 
