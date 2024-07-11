@@ -14,5 +14,5 @@
     dao.replyUpdate(vo);
     
     // 이동
-    response.sendRedirect("../main/main.jsp?mode=1&fno="+fno);
+    
 %>    

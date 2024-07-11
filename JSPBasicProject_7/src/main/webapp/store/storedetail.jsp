@@ -1,18 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.sist.dao.*,java.util.*"%>
-<jsp:useBean id="dao" class="com.sist.dao.FoodDAO"/>
+<jsp:useBean id="dao" class="com.sist.dao.GoodsDAO"/>
 <jsp:useBean id="rDao" class="com.sist.dao.ReplyDAO"/>
 <%
     String id=(String)session.getAttribute("id");
-    String fno=request.getParameter("fno");
-    // include => 파일전체에서 request를 공유할 수 있다 
-    // mode => 화면 변경 => include되는 파일 찾기 
-    // 나머지 데이터는 해당 JSP에서 처리 
-    FoodVO vo=dao.foodDetailData(Integer.parseInt(fno));
-    // 댓글목록 => fno
-    List<ReplyVO> list=rDao.replyListData(Integer.parseInt(fno),1);
-    
-    
+    String no=request.getParameter("no");
+    GoodsVO vo=dao.goodsDetailData(Integer.parseInt(no));
+    List<ReplyVO> list=rDao.replyListData(Integer.parseInt(no),2);
 %>
 <!DOCTYPE html>
 <html>
@@ -46,41 +40,31 @@ $(function(){ // main => window.onload=function(){}
 <body>
   <div class="row">
     <div class="col-sm-8">
-      <%-- 맛집 상세 , 댓글 --%>
       <table class="table">
        <tr>
-         <td width="30%" class="text-center" rowspan="5">
+         <td width="30%" class="text-center" rowspan="3">
           <img src="<%=vo.getPoster() %>" style="width: 100%">
          </td>
-         <td colspan="2"><h3><%=vo.getName() %>&nbsp;<span style="color:orange"><%=vo.getScore() %></span></h3></td>
+         <td colspan="2"><h3><%=vo.getName() %></h3>
+          <sub style="color:gray"><%=vo.getSub() %></sub>
+         </td>
        </tr>
        <tr>
-         <th class="text-center" width="15%">음식종류</th>
-         <td width="55%"><%=vo.getType() %></td>
+         <th class="text-center" width="15%">가격</th>
+         <td width="55%"><span style="color:magenta"><%=vo.getDiscount() %>%</span>&nbsp;<%=vo.getPrice() %></td>
        </tr>
        <tr>
-         <th class="text-center" width="15%">주소</th>
-         <td width="55%"><%=vo.getAddress() %></td>
-       </tr>
-       <tr>
-         <th class="text-center" width="15%">전화번호</th>
-         <td width="55%"><%=vo.getPhone() %></td>
-       </tr>
-       <tr>
-         <th class="text-center" width="15%">테마</th>
-         <td width="55%"><%=vo.getTheme() %></td>
+         <th class="text-center" width="15%">배송</th>
+         <td width="55%"><%=vo.getDelivery() %></td>
        </tr>
       </table>
       <table class="table">
-        <tr>
-          <td><%=vo.getContent() %></td>
-        </tr>
         <tr>
           <td class="text-right">
             <a href="#" class="btn btn-xs btn-info">찜하기</a>
             <a href="#" class="btn btn-xs btn-success">좋아요</a>
             <a href="#" class="btn btn-xs btn-warning">예약</a>
-            <a href="../main/main.jsp" class="btn btn-xs btn-primary">목록</a>
+            <a href="../main/main.jsp?mode=2" class="btn btn-xs btn-primary">목록</a>
           </td>
         </tr>
       </table>
@@ -103,7 +87,7 @@ $(function(){ // main => window.onload=function(){}
                          {
                       %>
                             <span class="btn btn-danger btn-xs updates" data-no="<%=rvo.getRno()%>">수정</span>
-                            <a href="../reply/delete.jsp?rno=<%=rvo.getRno() %>&fno=<%=rvo.getFno() %>" class="btn btn-primary btn-xs">삭제</a>
+                            <a href="../reply/delete.jsp?rno=<%=rvo.getRno() %>&fno=<%=rvo.getFno() %>&type=2" class="btn btn-primary btn-xs">삭제</a>
                       <%
                          }
                       %>
@@ -116,7 +100,8 @@ $(function(){ // main => window.onload=function(){}
                    <tr style="display: none" class="ups" id="ups<%=rvo.getRno()%>">
 			          <td>
 			           <form method="post" action="../reply/update.jsp">
-			            <input type="hidden" name=fno value="<%=vo.getFno()%>">
+			            <input type="hidden" name=type value="<%=rvo.getType()%>">
+			            <input type="hidden" name=fno value="<%=vo.getNo()%>">
 			            <input type="hidden" name=rno value="<%=rvo.getRno()%>">
 			            <textarea rows="4" cols="45" name="msg" style="float: left" required><%=rvo.getMsg() %></textarea>
 			            <button style="height: 82px;width: 100px;background-color: blue;color:white;float: left">댓글수정</button>
@@ -138,7 +123,9 @@ $(function(){ // main => window.onload=function(){}
         <tr>
           <td>
            <form method="post" action="../reply/insert.jsp">
-            <input type="hidden" name=fno value="<%=vo.getFno()%>">
+            <input type="hidden" name=type value="2">
+            
+            <input type="hidden" name=fno value="<%=vo.getNo()%>">
             <textarea rows="4" cols="60" name="msg" style="float: left" required></textarea>
             <button style="height: 82px;width: 120px;background-color: blue;color:white;float: left">댓글쓰기</button>
            </form>
@@ -150,7 +137,6 @@ $(function(){ // main => window.onload=function(){}
       %>
     </div>
     <div class="col-sm-4">
-      <%-- 지도 , 근처 맛집 --%>
     </div>
   </div>
 </body>

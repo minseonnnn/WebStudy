@@ -16,17 +16,17 @@
       <a class="navbar-brand" href="#">Request/Response</a>
     </div>
     <ul class="nav navbar-nav">
-      <li class="active"><a href="#">Home</a></li>
+      <li class="active"><a href="../main/main.jsp?mode=0">Home</a></li>
       <li><a href="#">답변형 게시판</a></li>
       <li><a href="#">자료실</a></li>
-      <li><a href="#">스토어</a></li>
+      <li><a href="../main/main.jsp?mode=2">스토어</a></li>
     </ul>
   </div>
 </nav>
 <div class="container">
   <div class="row">
     <%
-     if(id==null) // 로그인 안된 상태
+     if(id==null) // 로그인 안된 상태 => 세션은 등록이 없는 경우 => null
      {
     %>
     <div class="text-right">
