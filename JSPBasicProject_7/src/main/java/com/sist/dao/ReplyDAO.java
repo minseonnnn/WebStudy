@@ -38,12 +38,13 @@ public class ReplyDAO {
 		{
 			conn=dbConn.getConnection();
 			String sql="INSERT INTO food_reply VALUES("
-					  +"fr_rno_seq.nextval,?,?,?,?,SYSDATE)";
+					  +"fr_rno_seq.nextval,?,?,?,?,?,SYSDATE)";
 			ps=conn.prepareStatement(sql);
-			ps.setInt(1, vo.getFno());
-			ps.setString(2, vo.getId());
-			ps.setString(3, vo.getName());
-			ps.setString(4, vo.getMsg());
+			ps.setInt(1, vo.getType());
+			ps.setInt(2, vo.getFno());
+			ps.setString(3, vo.getId());
+			ps.setString(4, vo.getName());
+			ps.setString(5, vo.getMsg());
 			
 			ps.executeUpdate();
 		}catch(Exception ex)
@@ -56,15 +57,15 @@ public class ReplyDAO {
 		}
 	}
 	// 2. 데이터 읽기 
-	public List<ReplyVO> replyListData(int fno)
+	public List<ReplyVO> replyListData(int fno,int type)
 	{
 		List<ReplyVO> list=new ArrayList<ReplyVO>();
 		try
 		{
 			conn=dbConn.getConnection();
-			String sql="SELECT /*+ INDEX_DESC(food_reply fr_rno_pk)*/rno,fno,id,name,msg,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') "
+			String sql="SELECT /*+ INDEX_DESC(food_reply fr_rno_pk)*/rno,fno,id,name,msg,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS'),type "
 					  +"FROM food_reply "
-					  +"WHERE fno="+fno;
+					  +"WHERE fno="+fno+" and type="+type;
 			ps=conn.prepareStatement(sql);
 			ResultSet rs=ps.executeQuery();
 			while(rs.next())
@@ -76,6 +77,7 @@ public class ReplyDAO {
 				vo.setName(rs.getString(4));
 				vo.setMsg(rs.getString(5));
 				vo.setDbday(rs.getString(6));
+				vo.setType(rs.getInt(7));
 				list.add(vo);
 			}
 			rs.close();
@@ -108,7 +110,7 @@ public class ReplyDAO {
 			dbConn.disConnection(conn, ps);
 		}
 	}
-	// 댓글 수정
+	// 댓글 수정 
 	public void replyUpdate(ReplyVO vo)
 	{
 		try
