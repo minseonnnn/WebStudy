@@ -12,16 +12,16 @@
                             HttpServletResponse response)
                             {
                             
-                               
-                               
-                               
-                               
-                               
-                               
-                               
-                               
-                               
-                               
+                               PageContext pageContext;
+								    HttpSession session = null;
+								    ServletContext application;
+								    ServletConfig config;
+								    JspWriter out = null;
+								    Object page = this;
+                                  ========================= JSP의 소스코딩
+                                  <% %> 
+                                  out.write(HTML) 
+                                  <%= %> => out.print()
                             
                             }
                          }
