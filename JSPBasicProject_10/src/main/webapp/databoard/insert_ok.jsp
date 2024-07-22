@@ -49,5 +49,5 @@
       dao.databoardInsert(vo); // 데이터베이스에 추가
       
       // 이동 
-      response.sendRedirect("list.jsp");
+      response.sendRedirect("list.do");
 %>
