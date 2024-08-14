@@ -29,7 +29,7 @@ public class FoodDAO {
 		   conn=dbConn.getConnection();
 		   String sql="SELECT fno,name,poster,rownum "
 				     +"FROM (SELECT fno,name,poster "
-				     +"FROM food_house ORDER BY hit DESC) "
+				     +"FROM project_food_house ORDER BY hit DESC) "
 				     +"WHERE rownum<=12";
 		   ps=conn.prepareStatement(sql);
 		   ResultSet rs=ps.executeQuery();
@@ -71,7 +71,7 @@ public class FoodDAO {
 		   String sql="SELECT fno,name,poster,num "
 				     +"FROM (SELECT fno,name,poster,rownum as num "
 				     +"FROM (SELECT fno,name,poster "
-				     +"FROM food_house ORDER BY fno ASC)) "
+				     +"FROM project_food_house ORDER BY fno ASC)) "
 				     +"WHERE num BETWEEN ? AND ?";
 		   ps=conn.prepareStatement(sql);
 		   
@@ -109,7 +109,7 @@ public class FoodDAO {
 	   try
 	   {
 		   conn=dbConn.getConnection();
-		   String sql="SELECT CEIL(COUNT(*)/"+ROWSIZE+") FROM food_house";
+		   String sql="SELECT CEIL(COUNT(*)/"+ROWSIZE+") FROM project_food_house";
 		   ps=conn.prepareStatement(sql);
 		   // selectOne()
 		   ResultSet rs=ps.executeQuery();
@@ -152,7 +152,7 @@ public class FoodDAO {
 	   try
 	   {
 		   conn=dbConn.getConnection();
-		   String sql="UPDATE food_house SET "
+		   String sql="UPDATE project_food_house SET "
 				     +"hit=hit+1 "
 				     +"WHERE fno="+fno;
 		   ps=conn.prepareStatement(sql);
@@ -160,7 +160,7 @@ public class FoodDAO {
 		   
 		   sql="SELECT fno,name,type,phone,address,theme,poster,"
 			   +"content,score "
-			   +"FROM food_house "
+			   +"FROM project_food_house "
 			   +"WHERE fno="+fno;
 		   ps=conn.prepareStatement(sql); // 오라클로 전송 
 		   ResultSet rs=ps.executeQuery(); // 실행후에 결과값을 메모리에 저장 
@@ -194,7 +194,7 @@ public class FoodDAO {
 	   {
 		   conn=dbConn.getConnection();
 		   String sql="SELECT fno,name,poster,address,rownum "
-				     +"FROM food_house "
+				     +"FROM project_food_house "
 				     +"WHERE rownum<=6 AND "
 				     +"address LIKE '%'||?||'%'";
 		   ps=conn.prepareStatement(sql);
@@ -229,7 +229,7 @@ public class FoodDAO {
 		   String sql="SELECT fno,name,poster,address,num "
 				     +"FROM (SELECT fno,name,poster,address,rownum as num "
 				     +"FROM (SELECT fno,name,poster,address "
-				     +"FROM food_house "
+				     +"FROM project_food_house "
 				     +"WHERE address LIKE '%'||?||'%')) "
 				     +"WHERE num BETWEEN ? AND ?";
 		   ps=conn.prepareStatement(sql);
@@ -268,7 +268,7 @@ public class FoodDAO {
 	   try
 	   {
 		   conn=dbConn.getConnection();
-		   String sql="SELECT CEIL(COUNT(*)/"+ROWSIZE+") FROM food_house "
+		   String sql="SELECT CEIL(COUNT(*)/"+ROWSIZE+") FROM project_food_house "
 				     +"WHERE address LIKE '%'||?||'%'";
 		   ps=conn.prepareStatement(sql);
 		   ps.setString(1, addr);
@@ -293,7 +293,7 @@ public class FoodDAO {
 	   try
 	   {
 		   conn=dbConn.getConnection();
-		   String sql="SELECT COUNT(*) FROM food_house "
+		   String sql="SELECT COUNT(*) FROM project_food_house "
 				     +"WHERE address LIKE '%'||?||'%'";
 		   ps=conn.prepareStatement(sql);
 		   ps.setString(1, addr);
@@ -321,7 +321,7 @@ public class FoodDAO {
 		   conn=dbConn.getConnection();
 		   String sql="SELECT fno,name,hit,rownum "
 				     +"FROM (SELECT fno,name,hit "
-				     +"FROM food_house ORDER BY hit DESC) "
+				     +"FROM project_food_house ORDER BY hit DESC) "
 				     +"WHERE rownum<=7";
 		   ps=conn.prepareStatement(sql);
 		   ResultSet rs=ps.executeQuery();
