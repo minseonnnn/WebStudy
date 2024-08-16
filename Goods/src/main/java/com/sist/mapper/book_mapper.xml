@@ -22,4 +22,12 @@
 		FROM book
 		WHERE bno=#{bno}
 	</select>
+	
+	<select id="bookNewData" resultType="BookVO" parameterType="hashmap">
+    SELECT bno,btag,bgenre,cover,btitle,writer,price,sale_price,dis_rate,publisher,intro,intro_img,pages,isbn13,isbn10,bdate,num
+    FROM (SELECT bno,btag,bgenre,cover,btitle,writer,price,sale_price,dis_rate,publisher,intro,intro_img,pages,isbn13,isbn10,bdate,rownum as num
+    FROM (SELECT bno,btag,bgenre,cover,btitle,writer,price,sale_price,dis_rate,publisher,intro,intro_img,pages,isbn13,isbn10,bdate
+    FROM book WHERE bdate IS NOT NULL ORDER BY bdate DESC))
+    WHERE num BETWEEN #{start} AND #{end}
+  </select>
 </mapper>

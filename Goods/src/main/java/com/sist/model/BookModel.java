@@ -22,6 +22,7 @@ public class BookModel {
 		   
 		   map.put("start", start);
 		   map.put("end", end);
+		   List<BookVO> nList=BookDAO.bookNewData(map);
 		   List<BookVO> bList=BookDAO.bookListData(map);
 		   int totalpage=BookDAO.bookTotalPage();
 		   
@@ -32,6 +33,7 @@ public class BookModel {
 		   if(endPage>totalpage)
 			   endPage=totalpage;
 		   
+		   request.setAttribute("nList", nList);
 		   request.setAttribute("bList", bList);
 		   request.setAttribute("curpage", curpage);
 		   request.setAttribute("totalpage", totalpage);
@@ -54,4 +56,5 @@ public class BookModel {
 	 	  request.setAttribute("main_jsp", "../book/detail.jsp");
 	 	  return "../main/main.jsp";
 	   }
+	   
 }
