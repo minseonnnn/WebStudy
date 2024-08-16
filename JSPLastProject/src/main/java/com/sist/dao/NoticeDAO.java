@@ -7,24 +7,24 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import com.sist.vo.*;
 public class NoticeDAO {
     private static SqlSessionFactory ssf;
-    static 
+    static
     {
     	ssf=CreateSqlSessionFactory.getSsf();
     }
     /*
      *   <select id="noticeListData" resultType="NoticeVO" parameterType="hashmap">
 		   SELECT no,subject,name,TO_CHAR(regdate,'YYYY-MM-DD') as dbday,hit,num
-		   FROM (SELECT no,subject,name,regdate,hit,rownum as num
-		   FROM (SELECT no,subject,name,regdate,hit
+		   FROM (SELECT no,subject,name,regdate,hit,rownum as num 
+		   FROM (SELECT no,subject,name,regdate,hit 
 		   FROM notice ORDER BY no DESC))
 		   WHERE num BETWEEN #{start} AND #{end}
 		 </select>
      */
-    // 목록
+    // 목록 
     public static List<NoticeVO> noticeListData(Map map)
     {
     	List<NoticeVO> list=new ArrayList<NoticeVO>();
-    	// Connection => Sqlsession
+    	// Connection => SqlSession
     	SqlSession session=null;
     	try
     	{
@@ -37,7 +37,7 @@ public class NoticeDAO {
     	finally
     	{
     		if(session!=null)
-    			session.close(); // DBCP => 반환 (재사용)
+    			session.close(); //DBCP => 반환 (재사용)
     	}
     	return list;
     }
@@ -50,7 +50,7 @@ public class NoticeDAO {
 		   VALUES(#{no},#{type},#{subject},#{content})
 		 </insert>
      */
-    // 공지 추가
+    // 공지추가 
     public static void noticeInsert(NoticeVO vo)
     {
     	SqlSession session=null;
@@ -66,7 +66,7 @@ public class NoticeDAO {
     	finally
     	{
     		if(session!=null)
-    			session.close(); // DBCP => 반환 (재사용)
+    			session.close(); //DBCP => 반환 (재사용)
     	}
     }
     /*
@@ -74,7 +74,7 @@ public class NoticeDAO {
 		   SELECT COUNT(*) FROM notice
 		 </select>
      */
-    // 공지사항 총 갯수 읽기 => 일렬로 번호 출력
+    // 공지사항 총갯수 읽기  => 일렬로 번호 출력 
     public static int noticeRowCount()
     {
     	int count=0;
@@ -90,12 +90,12 @@ public class NoticeDAO {
     	finally
     	{
     		if(session!=null)
-    			session.close(); // DBCP => 반환 (재사용)
+    			session.close(); //DBCP => 반환 (재사용)
     	}
     	return count;
     }
     /*
-     *    <select id="noticeTop5Data" resultType="NoticeVO">
+     *   <select id="noticeTop5Data" resultType="NoticeVO">
 		   SELECT no,type,subject,rownum
 		   FROM (SELECT no,type,subject 
 		   FROM notice ORDER BY hit DESC)
@@ -117,14 +117,14 @@ public class NoticeDAO {
     	finally
     	{
     		if(session!=null)
-    			session.close(); // DBCP => 반환 (재사용)
+    			session.close(); //DBCP => 반환 (재사용)
     	}
     	return list;
     }
     // 수정 / => 상세보기 : hit
     /*
      *   <select id="noticeUpdateData" resultType="NoticeVO" parameterType="int">
-		   SELECT no,type,hit,name,subject,content,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as 
+		   SELECT no,type,hit,name,subject,content,TO_CHAR(regdate,'YYYY-MM-DD HH24:MI:SS') as dbday FROM notice
 		   WHERE no=#{no}
 		 </select>
      */
@@ -143,7 +143,7 @@ public class NoticeDAO {
     	finally
     	{
     		if(session!=null)
-    			session.close(); // DBCP => 반환 (재사용)
+    			session.close(); //DBCP => 반환 (재사용)
     	}
     	return vo;
     }
@@ -169,13 +169,13 @@ public class NoticeDAO {
     	finally
     	{
     		if(session!=null)
-    			session.close(); // DBCP => 반환 (재사용)
+    			session.close(); //DBCP => 반환 (재사용)
     	}
     }
     /*
      *   <delete id="noticeDelete" parameterType="int">
-		   DELETE FROM notice
-		   WHERE no=#{no}
+		  DELETE FROM notice
+		  WHERE no=#{no}
 		 </delete>
      */
     public static void noticeDelete(int no)
@@ -192,7 +192,7 @@ public class NoticeDAO {
     	finally
     	{
     		if(session!=null)
-    			session.close(); // DBCP => 반환 (재사용)
+    			session.close(); //DBCP => 반환 (재사용)
     	}
     }
     /*
@@ -202,7 +202,7 @@ public class NoticeDAO {
 		   WHERE no=#{no}
 		 </update>
      */
-    public static NoticeVO noticeDetailData(int no)
+    public static NoticeVO noticeDetilData(int no)
     {
     	NoticeVO vo=new NoticeVO();
     	SqlSession session=null;
@@ -219,9 +219,8 @@ public class NoticeDAO {
     	finally
     	{
     		if(session!=null)
-    			session.close(); // DBCP => 반환 (재사용)
+    			session.close(); //DBCP => 반환 (재사용)
     	}
     	return vo;
     }
-    
 }

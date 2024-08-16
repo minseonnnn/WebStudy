@@ -16,9 +16,7 @@ public class AdminModel {
 	   
 	   request.setAttribute("admin_jsp", "../adminpage/adminpage_home.jsp");
 	   request.setAttribute("main_jsp", "../adminpage/adminpage_main.jsp");
-	   CommonsModel.footerPrint(request);
 	   return "../main/main.jsp";
-	   
    }
    
    @RequestMapping("adminpage/member_list.do")
@@ -27,7 +25,6 @@ public class AdminModel {
 	   
 	   request.setAttribute("admin_jsp", "../adminpage/member_list.jsp");
 	   request.setAttribute("main_jsp", "../adminpage/adminpage_main.jsp");
-	   CommonsModel.footerPrint(request);
 	   return "../main/main.jsp";
    }
    
@@ -61,6 +58,7 @@ public class AdminModel {
 	   
 	   request.setAttribute("admin_jsp", "../notice/notice_list.jsp");
 	   request.setAttribute("main_jsp", "../adminpage/adminpage_main.jsp");
+	   
 	   CommonsModel.footerPrint(request);
 	   return "../main/main.jsp";
    }
@@ -77,7 +75,6 @@ public class AdminModel {
    @RequestMapping("adminpage/notice_insert_ok.do")
    public String notice_insert_ok(HttpServletRequest request,HttpServletResponse response)
    {
-	   System.out.println("insert_ok");
 	   try
 	   {
 		   request.setCharacterEncoding("UTF-8");
@@ -107,29 +104,29 @@ public class AdminModel {
    @RequestMapping("adminpage/notice_update_ok.do")
    public String notice_update_ok(HttpServletRequest request,HttpServletResponse response)
    {
-   try
-   {
-	   request.setCharacterEncoding("UTF-8");
-   }catch(Exception ex) {}
-   String type=request.getParameter("type");
-   String subject=request.getParameter("subject");
-   String content=request.getParameter("content");
-   String no=request.getParameter("no");
-   NoticeVO vo=new NoticeVO();
-   vo.setType(Integer.parseInt(type));
-   vo.setSubject(subject);
-   vo.setContent(content);
-   vo.setNo(Integer.parseInt(no));
-   NoticeDAO.noticeInsert(vo);
-   return "redirect:../adminpage/notice_list.do";
-   
+	   try
+	   {
+		   request.setCharacterEncoding("UTF-8");
+	   }catch(Exception ex) {}
+	   String type=request.getParameter("type");
+	   String subject=request.getParameter("subject");
+	   String content=request.getParameter("content");
+	   String no=request.getParameter("no");//update,delete
+	   NoticeVO vo=new NoticeVO();
+	   vo.setType(Integer.parseInt(type));
+	   vo.setSubject(subject);
+	   vo.setContent(content);
+	   vo.setNo(Integer.parseInt(no));
+	   // DB연동 
+	   NoticeDAO.noticeUpdate(vo);
+	   return "redirect:../adminpage/notice_list.do";
    }
    
    @RequestMapping("adminpage/notice_delete.do")
    public String notice_delete(HttpServletRequest request,HttpServletResponse response)
    {
 	   String no=request.getParameter("no");
-	   // DB연동
+	   //DB연동 
 	   NoticeDAO.noticeDelete(Integer.parseInt(no));
 	   return "redirect:../adminpage/notice_list.do";
    }

@@ -27,9 +27,9 @@
    WHERE no=#{no}
  </update>
  <!-- 
-    private int no,type,hit;
-	  private String name,subject,content,dbday,notice_type;
-	  private Date regdate;
+   private int no,type,hit;
+  private String name,subject,content,dbday,notice_type;
+  private Date regdate;
   -->
  <!-- 공지 수정 admin-->
  <select id="noticeUpdateData" resultType="NoticeVO" parameterType="int">
@@ -43,8 +43,8 @@
  </update>
  <!-- 공지 삭제 admin-->
  <delete id="noticeDelete" parameterType="int">
-   DELETE FROM notice
-   WHERE no=#{no}
+  DELETE FROM notice
+  WHERE no=#{no}
  </delete>
  <select id="noticeTop5Data" resultType="NoticeVO">
    SELECT no,type,subject,rownum
