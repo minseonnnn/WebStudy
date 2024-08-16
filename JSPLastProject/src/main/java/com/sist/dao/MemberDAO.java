@@ -56,6 +56,78 @@ public class MemberDAO {
 	  }
 	  return vo;
   }
+  // 아이디 중복 체크
+  public static int memberIdCheck(String id)
+  {
+	  int count=0;
+	  SqlSession session=null;
+	  try
+	  {
+		  session=ssf.openSession();
+		  count=session.selectOne("memberIdCountData",id);
+	  }catch(Exception ex)
+	  {
+		  ex.printStackTrace();
+	  }
+	  finally
+	  {
+		  if(session!=null)
+			  session.close();
+	  }
+	  return count;
+  }
+  /*
+   *     <insert id="memberInsert" parameterType="MemberVO">
+		   INSERT INTO project_member VALUES(
+		     #{id},#{pwd},#{name},#{sex},#{birthday},#{post},
+		     #{addr1},#{addr2},#{phone},#{email},#{content},SYSDATE,'n'
+		   )
+		 </insert>
+   */
+  public static void memberInsert(MemberVO vo)
+  {
+	  SqlSession session=null;
+	  try
+	  {
+		  session=ssf.openSession(true);
+		  session.insert("memberInsert",vo);
+	  }catch(Exception ex)
+	  {
+		  ex.printStackTrace();
+	  }
+	  finally
+	  {
+		  if(session!=null)
+			  session.close();
+	  }
+  }
+  // 수정
+  /*
+   *     <select id="memberUpdateData" resultType="MemberVO" parameterType="string">
+		   SELECT name,sex,birthday,post,addr1,addr2,phone,email,content
+		   FROM project_member
+		   WHERE id=#{id}
+		 </select>	
+   */
+  public static MemberVO memberUpdateData(String id)
+  {
+	  MemberVO vo=new MemberVO();
+	  SqlSession session=null;
+	  try
+	  {
+		  session=ssf.openSession(true);
+		  vo=session.selectOne("memberUpdateData",id);
+	  }catch(Exception ex)
+	  {
+		  ex.printStackTrace();
+	  }
+	  finally
+	  {
+		  if(session!=null)
+			  session.close();
+	  }
+	  return vo;
+  }
 }
 
 

@@ -35,21 +35,22 @@ $(function(){
 	})
 })
 </script>
+<style type="text/css">
+
+</style>
 </head>
 <body>
 <div class="wrapper row3">
   <main class="container clear">
-   <h2 class="sectiontitle">회원 가입</h2>
+   <h2 class="sectiontitle">회원 수정</h2>
    <div class="row row1">
-   <form method="post" action="../member/join_ok.do" name="frm">
+   <form method="post" action="../member/join_update_ok.do" name="frm">
     <table class="table">
      <tr>
       <th class="text-right" width="15%">ID</th>
       <td width="85%" class="inline">
        <input type="text" size=20 class="input-sm" 
-          readonly name="id" id="id">
-       <input type="button" value="중복체크"
-         class="btn-sm btn-danger" id="checkBtn">
+          readonly name="id" id="id" value="${vo.id }">
       </td>
      </tr>
      <tr>

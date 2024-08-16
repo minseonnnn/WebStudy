@@ -9,6 +9,7 @@ import com.sist.controller.RequestMapping;
 import java.util.*;
 import com.sist.dao.*;
 import com.sist.vo.*;
+
 public class MainModel {
   @RequestMapping("main/main.do")
   public String main_main(HttpServletRequest request,HttpServletResponse response)
@@ -32,9 +33,8 @@ public class MainModel {
 	    List<FoodVO> hitList=FoodDAO.foodHitTopData();
 	    List<FoodVO> likeList=FoodDAO.foodLikeTopData();
 	    List<FoodVO> jjimList=FoodDAO.foodJjimTopData();
-	    
 	    /*
-	     *   Footer에 공지사항 출력
+	     *   Footer에 공지사항 출력 
 	     */
 	    
 	    CommonsModel.footerPrint(request);
@@ -46,6 +46,7 @@ public class MainModel {
 	    request.setAttribute("main_jsp", "../main/home.jsp");
 	    return "../main/main.jsp";
   }
+  
 }
 
 

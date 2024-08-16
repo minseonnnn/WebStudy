@@ -46,11 +46,12 @@ public class NoticeModel {
    public String notice_detail(HttpServletRequest request,HttpServletResponse response)
    {
 	   String no=request.getParameter("no");
-	   NoticeVO vo=NoticeDAO.noticeDetailData(Integer.parseInt(no));
+	   NoticeVO vo=NoticeDAO.noticeDetilData(Integer.parseInt(no));
 	   vo.setNotice_type(types[vo.getType()]);
 	   request.setAttribute("vo", vo);
 	   request.setAttribute("main_jsp", "../notice/detail.jsp");
 	   CommonsModel.footerPrint(request);
 	   return "../main/main.jsp";
    }
+   
 }
