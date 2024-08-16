@@ -114,4 +114,23 @@ public class BookDAO {
 		   }
 		   return vo;
 	   }
+	   public static List<BookVO> bookNewData(Map map)
+		  {
+			  List<BookVO> list=new ArrayList<BookVO>();
+			  SqlSession session=null;
+			  try
+			  {
+				  session=ssf.openSession();
+				  list=session.selectList("bookNewData",map);
+			  }catch(Exception ex)
+			  {
+				  ex.printStackTrace();
+			  }
+			  finally
+			  {
+				  if(session!=null)
+					  session.close();
+			  }
+			  return list;
+		  }
 }
