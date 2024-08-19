@@ -1,6 +1,6 @@
 package com.sist.vo;
 /*
- *  NO         NOT NULL NUMBER         
+ *   NO         NOT NULL NUMBER         
 	ID                  VARCHAR2(20)   
 	NAME       NOT NULL VARCHAR2(50)   
 	SUBJECT    NOT NULL VARCHAR2(2000) 
@@ -8,8 +8,8 @@ package com.sist.vo;
 	REGDATE             DATE           
 	GROUP_ID            NUMBER         
 	GROUP_STEP          NUMBER         
-	ISREPLY             NUMBER         
-	HIT                 NUMBER    
+	ISREPLY             NUMBER    
+	HIT   NUMBER
  */
 import java.util.*;
 

@@ -16,22 +16,22 @@ Shadowbox.init({
 })
 $(function(){
 	$('#checkBtn').on('click',function(){
-		  Shadowbox.open({
-			  content:'../member/idcheck.do',
-			  player:'iframe',
-			  width:370,
-			  height:200,
-			  title:'아이디 중복체크'
-		  })
-	}) 
+		Shadowbox.open({
+			content:'../member/idcheck.do',
+			player:'iframe',
+			width:370,
+			height:200,
+			title:'아이디 중복체크'
+		})
+	})
 	$('#postBtn').click(function(){
-		  new daum.Postcode({
-			    oncomplete:function(data)
-			    {
-			    	  $('#post1').val(data.zonecode)
-			    	  $('#addr1').val(data.address)
-			    }
-		  }).open()
+		new daum.Postcode({
+			oncomplete:function(data)
+			{
+				$('#post1').val(data.zonecode)
+				$('#addr1').val(data.address)
+			}
+		}).open()
 	})
 })
 </script>
