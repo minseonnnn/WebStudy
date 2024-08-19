@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,8 +21,8 @@
 }
 
 .thumb img {
-	width: 100%; /* 이미지가 부모 요소의 너비에 맞게 조정되도록 */
-	height: auto; /* 이미지의 비율을 유지하도록 설정 */
+	width: 100%;
+	height: auto; 
 	border-radius: 23px;
 }
 
@@ -30,11 +31,15 @@
 	white-space: nowrap;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	padding: 10px; /* 텍스트와 이미지 사이의 여백 설정 */
+	padding: 10px; 
 }
 
 .down-content p {
-	margin: 0; /* 문단의 기본 여백 제거 */
+  text-align: left;
+	white-space: nowrap;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	margin: 0; 
 }
 
 .live-stream .thumb {
@@ -53,41 +58,40 @@
 
 .search {
 	position: relative;
-	display: flex; /* flexbox를 사용하여 아이콘과 입력창을 정렬 */
-	justify-content: flex-end; /* 오른쪽 정렬 */
-	margin-top: -25px; /* 검색창을 더 위로 이동 (값을 조정하여 위치 조정) */
-	margin-bottom: -25px;
+	display: flex; 
+	justify-content: flex-end; 
+	margin: -30px 30px 20px 0;
 }
 
 .search-input {
-	background-color: #f5f5f5; /* 배경색 설정 */
+	background-color: #f5f5f5; 
 	width: 300px;
 	height: 40px;
 	border-radius: 20px;
-	border: 1px solid #ccc; /* 연한 회색 테두리 추가 */
+	border: 1px solid #ccc; 
 	color: #666;
 	font-size: 14px;
-	padding: 0 15px; /* 여백 설정 */
-	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* 부드러운 그림자 추가 */
+	padding: 0 15px; 
+	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 .search-input input {
-	width: calc(100% - 30px); /* 입력창 크기 조정 */
+	width: calc(100% - 30px); 
 	height: 100%;
 	border: none;
 	outline: none;
-	background: transparent; /* 배경을 투명하게 설정 */
+	background: transparent; 
 	color: #666;
 	font-size: 14px;
 }
 
-.search-input i {
+.search-input a {
 	position: absolute;
-	right: 10px; /* 아이콘과 입력창 사이의 여백 설정 */
+	right: 20px; 
 	top: 50%;
 	transform: translateY(-50%);
 	color: #999;
-	cursor: pointer; /* 아이콘에 클릭 가능한 느낌 추가 */
+	cursor: pointer; 
 }
 
 .heading-section h3 {
@@ -109,108 +113,156 @@
 .page {
 	list-style: none;
 	padding: 0;
-	margin: 20px auto; /* 위와 아래 여백을 추가하고 자동으로 가운데 정렬 */
+	margin: 20px auto; 
 	display: flex;
-	justify-content: center; /* 네비게이션 항목을 가운데로 정렬 */
+	justify-content: center; 
 	font-family: Arial, sans-serif;
 }
 
 .page li {
-	margin: 0 3px; /* 네비게이션 항목 간의 여백 */
+	margin: 0 3px; 
 }
 
 .page a {
 	text-decoration: none;
-	color: #0197A3; /* 링크 색상 */
+	color: #0197A3; 
 	padding: 8px 12px;
-	border: 1px solid #0197A3; /* 링크 테두리 색상 */
-	border-radius: 4px; /* 둥근 모서리 */
-	transition: background-color 0.3s, color 0.3s; /* 부드러운 색상 변화 */
+	border: 1px solid #0197A3; 
+	border-radius: 4px; 
+	transition: background-color 0.3s, color 0.3s; 
 }
 
 .page a:hover {
-	background-color: #0197A3; /* 호버 시 배경색 */
-	color: #fff; /* 호버 시 텍스트 색상 */
+	background-color: #0197A3; 
+	color: #fff; 
 }
 
 .page .current a {
-	background-color: #0197A3; /* 현재 페이지 배경색 */
-	color: #fff; /* 현재 페이지 텍스트 색상 */
-	border: 1px solid #0197A3; /* 현재 페이지 테두리 색상 */
-	pointer-events: none; /* 현재 페이지 클릭 방지 */
+	background-color: #0197A3; 
+	color: #fff;
+	border: 1px solid #0197A3; 
+	pointer-events: none; 
 }
 
 .page .current a:hover {
-	background-color: #0197A3; /* 현재 페이지 호버 시 배경색 */
-	color: #fff; /* 현재 페이지 호버 시 텍스트 색상 */
+	background-color: #0197A3; 
+	color: #fff; 
 }
 
 .page li:first-child a {
-	border-radius: 4px 0 0 4px; /* 왼쪽 끝 모서리 둥글게 */
+	border-radius: 4px 0 0 4px;
 }
 
 .page li:last-child a {
-	border-radius: 0 4px 4px 0; /* 오른쪽 끝 모서리 둥글게 */
+	border-radius: 0 4px 4px 0;
 }
 .rounded-box {
-    border: 2px solid #ddd; /* 테두리 색상 */
-    border-radius: 15px; /* 둥근 모서리 */
-    padding: 20px; /* 내부 여백 */
-    background-color: #ffffff; /* 배경 색상 */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* 그림자 */
-    margin: 0 auto; /* 가운데 정렬 */
-    margin-bottom: 10px;
-    margin-right: 20px;
+    border: 2px solid #ddd; 
+    border-radius: 15px; 
+    padding: 20px; 
+    background-color: #ffffff; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    margin: 0 auto; 
+    margin-bottom: 30px;
+    margin-right: 25px;
+}
+/* 장르 선택 메뉴 스타일 */
+.genre-select {
+    position: relative;
+    display: flex;
+    justify-content: flex-end;
+    margin-top: -30px; 
+	  margin-bottom: -30px;
+}
+
+.genre-select select {
+    background-color: #f5f5f5;
+    border: 1px solid #ccc;
+    border-radius: 20px;
+    color: #666;
+    font-size: 14px;
+    padding: 10px 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    width: 200px;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+.genre-select select:focus {
+    border-color: #0197A3;
+    color: #333;
+}
+
+.genre-select label {
+    margin-right: 10px;
+    font-weight: bold;
+    color: #333;
+    line-height: 40px;
 }
 </style>
 </head>
 <body>
 	<div class="container">
-    <div class="row" style="margin-top: 150px">
-        <div class="most-popular2">
-            <div class="featured-games2 rounded-box"> <!-- 여기에 rounded-box 클래스를 추가 -->
-                <div class="heading-section">
-                    <span style="font-weight: bold; font-size: 25px; color: #979797;">&emsp;# &nbsp;최신&nbsp;도서</span>
-                </div>
-                <div class="row" style="height: 420px;">
-                    <div class="col-lg-1">
-                        <div class="blank"></div>
-                    </div>
-                    <div class="col-lg-10">
-                        <h3><br></h3>
-                        <div class="owl-features owl-carousel">
-                            <c:forEach var="vo" items="${nList}">
-                                <div class="item">
-                                    <div class="thumb">
-                                        <a href="../book/detail.do?bno=${vo.bno }" class="thumb-link">
-                                            <img src="${vo.cover }" alt="" style="width: 220px; height: 300px;">
-                                        </a>
-                                        <span style="font-size: 15px; font-weight: bold; width: 220px; height: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
-                                            ${vo.btitle }
-                                            <br>
-                                            <small style="color: #979797;font-weight: 250; ">${vo.writer }${vo.writer != null ? ' 저 | ' : ''}${vo.publisher }</small>
-                                        </span>
-                                    </div>
-                                </div>
-                            </c:forEach>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- ***** Featured Games End ***** -->
+		<div class="row" style="margin-top: 150px">
+			<div class="most-popular2">
+				<div class="search">
+					<form action="../book/list.do" method="post" id="searchForm">
+						<div class="search-input">
+							<input type="text" placeholder="Type Something" id="searchText"
+								name="search" onkeypress="handle(event)" />
+							<button type="submit" class="fa fa-search" style="border:none; background:transparent"></button>
+							
+							<!-- 변경된 부분 -->
+						</div>
+					</form>
+				</div>
+				<div class="featured-games2 rounded-box">
+					<div class="heading-section">
+						<span style="font-weight: bold; font-size: 25px; color: #979797;">&emsp;#
+							&nbsp;최신&nbsp;도서</span>
+					</div>
+					<div class="row" style="height: 420px;">
+						<div class="col-lg-1">
+							<div class="blank"></div>
+						</div>
+						<div class="col-lg-10">
+							<h3>
+								<br>
+							</h3>
+							<div class="owl-features owl-carousel">
+								<c:forEach var="vo" items="${nList}">
+									<div class="item">
+										<div class="thumb">
+											<a href="../book/detail.do?bno=${vo.bno }" class="thumb-link">
+												<img src="${vo.cover }" alt=""
+												style="width: 220px; height: 300px;">
+											</a> <span
+												style="font-size: 15px; font-weight: bold; width: 220px; height: 300px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">
+												${vo.btitle } <br> <small
+												style="color: #979797; font-weight: 250;">${vo.writer }${vo.writer != null ? ' 저 | ' : ''}${vo.publisher }</small>
+											</span>
+										</div>
+									</div>
+								</c:forEach>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<!-- ***** Featured Games End ***** -->
 			<div class="row">
 				<div class="col-lg-12">
-					<div class="page-content" style="margin-top:0px;">
+					<div class="page-content" style="margin-top: 0px;">
 						<div class="heading-section">
 							<h3>Book List</h3>
 						</div>
-						<div class="search">
-							<div class="search-input">
-								<i class="fa fa-search"></i> <input type="text"
-									placeholder="Type Something" id="searchText"
-									name="searchKeyword" onkeypress="handle" />
-							</div>
+						<div class="genre-select">
+							<select id="genre" name="genre"
+								onchange="window.location.href=this.value;">
+								<option value="#" disabled selected>장르 선택</option>
+								<c:forEach var="g" items="${genres}" varStatus="i">
+								<option value="../book/list.do?genre=${i.index}">${i.index==0?'전체':g}</option>
+								</c:forEach>
+							</select>
 						</div>
 						<div class="live-stream">
 							<div class="col-lg-12"></div>
@@ -237,7 +289,10 @@
 											<div class="down-content" style="margin-left: 18px;">
 												<p>${vo.btitle }</p>
 												<small>${vo.writer }${vo.writer != null ? ' 저 | ' : ''}${vo.publisher }</small><br>
-												<p>${vo.price }원</p>
+												<p>
+													<fmt:formatNumber value="${vo.price}" type="number" />
+													원
+												</p>
 											</div>
 										</div>
 									</div>
@@ -250,15 +305,17 @@
 			<nav>
 				<ul class="page page-lg">
 					<c:if test="${startPage > 1}">
-						<li><a href="../book/list.do?page=${startPage-1}">&laquo;
+						<li><a
+							href="../book/list.do?page=${startPage-1}&genre=${genre}&search=${search}">&laquo;
 								Previous</a></li>
 					</c:if>
 					<c:forEach var="i" begin="${startPage}" end="${endPage}">
 						<li ${i == curpage ? "class='current'" : ""}><a
-							href="../book/list.do?page=${i}">${i}</a></li>
+							href="../book/list.do?page=${i}&genre=${genre}&search=${search}">${i}</a></li>
 					</c:forEach>
 					<c:if test="${endPage < totalpage}">
-						<li><a href="../book/list.do?page=${endPage+1}">Next
+						<li><a
+							href="../book/list.do?page=${endPage+1}&genre=${genre}&search=${search}">Next
 								&raquo;</a></li>
 					</c:if>
 				</ul>

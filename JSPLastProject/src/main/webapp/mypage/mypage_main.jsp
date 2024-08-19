@@ -10,7 +10,7 @@
 <body>
 <div class="wrapper row3">
   <main class="container clear">
-   <h2 class="sectiontitle">마이페이지</h2>
+   <h2 class="sectiontitle">${title }</h2>
    <div class="one_quarter first">
 	    <div class="panel panel-info">
 	    <div class="panel-heading">
@@ -34,7 +34,7 @@
 	      <li class="list-group-item"><a href="#">찜관리</a></li>
 	      <li class="list-group-item"><a href="#">좋아요관리</a></li>
 	      <li class="list-group-item"><a href="#">장바구니관리</a></li>
-	      <li class="list-group-item"><a href="#">예약관리</a></li>
+	      <li class="list-group-item"><a href="../mypage/mypage_reserve.do">예약관리</a></li>
 	    </ul>
 	   </div>
    </div>

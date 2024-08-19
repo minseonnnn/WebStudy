@@ -77,12 +77,12 @@ public class MemberDAO {
 	  return count;
   }
   /*
-   *     <insert id="memberInsert" parameterType="MemberVO">
+   *    <insert id="memberInsert" parameterType="MemberVO">
 		   INSERT INTO project_member VALUES(
 		     #{id},#{pwd},#{name},#{sex},#{birthday},#{post},
 		     #{addr1},#{addr2},#{phone},#{email},#{content},SYSDATE,'n'
 		   )
-		 </insert>
+		  </insert>
    */
   public static void memberInsert(MemberVO vo)
   {
@@ -101,13 +101,13 @@ public class MemberDAO {
 			  session.close();
 	  }
   }
-  // 수정
+  // 수정 
   /*
-   *     <select id="memberUpdateData" resultType="MemberVO" parameterType="string">
-		   SELECT name,sex,birthday,post,addr1,addr2,phone,email,content
+   *   <select id="memberUpdateData" resultType="MemberVO" parameterType="string">
+		   SELECT id,name,sex,birthday,post,addr1,addr2,phone,email,content
 		   FROM project_member
 		   WHERE id=#{id}
-		 </select>	
+		  </select>
    */
   public static MemberVO memberUpdateData(String id)
   {
@@ -116,7 +116,7 @@ public class MemberDAO {
 	  try
 	  {
 		  session=ssf.openSession(true);
-		  vo=session.selectOne("memberUpdateData",id);
+		  vo=session.selectOne("memberUpdateData", id);
 	  }catch(Exception ex)
 	  {
 		  ex.printStackTrace();
@@ -128,7 +128,50 @@ public class MemberDAO {
 	  }
 	  return vo;
   }
+  /*
+   *   <select id="memberGetPassword" resultType="string" parameterType="string">
+		   SELECT pwd FROM project_member
+		   WHERE id=#{id}
+		  </select>
+		  <update id="memberUpdate" parameterType="MemberVO">
+		   UPDATE project_member SET 
+		   name=#{name},birthday=#{birthday},post=#{post},
+		   addr1=#{addr1},addr2=#{addr2},phone=#{phone},email=#{email},
+		   content=#{content}
+		   WHERE id=#{id}
+		  </update>
+   */
+  public static boolean memberUpdate(MemberVO vo)
+  {
+	  boolean bCheck=false;
+	  SqlSession session=null;
+	  try
+	  {
+		  session=ssf.openSession();
+		  String db_pwd=session.selectOne("memberGetPassword", vo.getId());
+		  if(db_pwd.equals(vo.getPwd()))
+		  {
+			  bCheck=true;
+			  session.update("memberUpdate",vo);
+			  session.commit();
+		  }
+		  else
+		  {
+			  bCheck=false;
+		  }
+	  }catch(Exception ex)
+	  {
+		  ex.printStackTrace();
+	  }
+	  finally
+	  {
+		  if(session!=null)
+			  session.close();
+	  }
+	  return bCheck;
+  }
 }
+
 
 
 
