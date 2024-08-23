@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans>
-<bean id="main" class="com.sist.model.MainModel"></bean>
-<bean id="member" class="com.sist.model.MemberModel"></bean>
-<bean id="profile" class="com.sist.model.ProfileModel"></bean>
-<bean id="book" class="com.sist.model.BookModel"></bean>
+	<bean id="main" class="com.sist.model.MainModel"></bean>
+	<bean id="member" class="com.sist.model.MemberModel"></bean>
+	<bean id="profile" class="com.sist.model.ProfileModel"></bean>
+	<bean id="book" class="com.sist.model.BookModel"></bean>
+	<bean id="review" class="com.sist.model.ReviewModel"></bean>
+	<bean id="like" class="com.sist.model.LikeModel"></bean>
 </beans>

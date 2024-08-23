@@ -170,6 +170,129 @@ public class MemberDAO {
 	  }
 	  return bCheck;
   }
+  /*
+   *   <select id="memberIdFindCount" resultType="int" parameterType="MemberVO">
+		   SELECT COUNT(*) FROM project_member
+		   WHERE name=#{name} AND email=#{email}
+		  </select>
+		  <select id="memberIdFindData" resultType="String" parameterType="MemberVO">
+		   SELECT RPAD(SUBSTR(id,1,2),LENGTH(id),'*') FROM project_member
+		   WHERE name=#{name} AND email=#{email}
+		  </select>
+   */
+  public static String memberIdFindData(MemberVO vo)
+  {
+	  String result="";
+	  SqlSession session=null;
+	  try
+	  {
+		  session=ssf.openSession();
+		  int count=session.selectOne("memberIdFindCount",vo);
+		  if(count==0)
+		  {
+			  result="no";
+		  }
+		  else
+		  {
+			  result=session.selectOne("memberIdFindData",vo);
+		  }
+	  }catch(Exception ex)
+	  {
+		  ex.printStackTrace();
+	  }
+	  finally
+	  {
+		  if(session!=null)
+			  session.close();
+	  }
+	  return result;
+  }
+  /*
+   *   <select id="memberPwdFindCount" resultType="int" parameterType="string">
+		   SELECT COUNT(*) FROM project_member
+		   WHERE id=#{id}
+		  </select>
+		  <select id="memberPwdFindData" resultType="String" parameterType="string">
+		   SELECT pwd FROM project_member
+		   WHERE id=#{id}
+		  </select>
+   */
+  public static String memberPwdFindData(String id)
+  {
+	  String result="";
+	  SqlSession session=null;
+	  try
+	  {
+		  session=ssf.openSession();
+		  int count=session.selectOne("memberPwdFindCount",id);
+		  if(count==0)
+		  {
+			  result="no";
+		  }
+		  else
+		  {
+			  String pwd=session.selectOne("memberPwdFindData",id);
+			  result=pwd;
+		  }
+	  }catch(Exception ex)
+	  {
+		  ex.printStackTrace();
+	  }
+	  finally
+	  {
+		  if(session!=null)
+			  session.close();
+	  }
+	  return result;
+  }
+  /*
+   *   비밀번호 수정 
+   *   <select id="pwdCheckData" resultType="int" parameterType="hashmap">
+		   SELECT COUNT(*) FROM project_member
+		   WHERE id=#{id} AND pwd=#{pwd}
+		  </select>
+		  <update id="pwdChange" parameterType="hashmap">
+		   UPDATE project_member SET
+		   pwd=#{pwd}
+		   WHERE id=#{id}
+		  </update>
+   */
+  public static int pwdCheckData(Map map)
+  {
+	  int count=0;
+	  SqlSession session=null;
+	  try
+	  {
+		  session=ssf.openSession();
+		  count=session.selectOne("pwdCheckData",map);
+	  }catch(Exception ex)
+	  {
+		  ex.printStackTrace();
+	  }
+	  finally
+	  {
+		  if(session!=null)
+			  session.close();
+	  }
+	  return count;
+  }
+  public static void pwdChange(Map map)
+  {
+	  SqlSession session=null;
+	  try
+	  {
+		  session=ssf.openSession(true);
+		  session.update("pwdChange",map);
+	  }catch(Exception ex)
+	  {
+		  ex.printStackTrace();
+	  }
+	  finally
+	  {
+		  if(session!=null)
+			  session.close();
+	  }
+  }
 }
 
 
