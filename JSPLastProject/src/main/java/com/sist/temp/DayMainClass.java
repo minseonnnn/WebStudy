@@ -1,4 +1,3 @@
-
 package com.sist.temp;
 import java.util.*;
 public class DayMainClass {
@@ -25,7 +24,7 @@ public class DayMainClass {
 	   
 	   for(int i=0;i<times.length;i++)
 	   {
-		   times[i]=(int)(Math.random()*22)+1;
+		   times[i]=(int)(Math.random()*20)+1;
 		   for(int j=0;j<i;j++)
 		   {
 			   // 중복 제거

@@ -1,12 +1,24 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"  import="java.util.*,com.sist.vo.*,com.sist.dao.*"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>Most Popular Games</title>
+<script type="text/javascript">
+function toggleRecentBooks() {
+    const container = document.querySelector('.recent-books-container');
+    const toggleIcon = container.querySelector('.toggle-icon');
+    if (container.classList.contains('expanded')) {
+        container.classList.remove('expanded');
+        toggleIcon.textContent = '+';
+    } else {
+        container.classList.add('expanded');
+        toggleIcon.textContent = '-';
+    }
+}
+</script>
 <link rel="stylesheet" href="../book/mstyle.css">
 <style type="text/css">
 .item {
@@ -22,7 +34,7 @@
 
 .thumb img {
 	width: 100%;
-	height: auto; 
+	height: 100%; 
 	border-radius: 23px;
 }
 
@@ -103,14 +115,6 @@
 }
 
 .page {
-	padding: 0;
-	margin: 20px 0;
-	display: flex;
-	justify-content: center;
-	font-family: Arial, sans-serif;
-}
-
-.page {
 	list-style: none;
 	padding: 0;
 	margin: 20px auto; 
@@ -166,7 +170,7 @@
     margin-bottom: 30px;
     margin-right: 25px;
 }
-/* 장르 선택 메뉴 스타일 */
+
 .genre-select {
     position: relative;
     display: flex;
@@ -198,6 +202,63 @@
     color: #333;
     line-height: 40px;
 }
+.recent-books-container {
+    position: fixed; 
+    right: 60px; 
+    bottom: 20px; 
+    width: 200px; 
+    background-color: #ffffff; 
+    border: 2px solid #ddd; 
+    border-radius: 15px; 
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); 
+    padding: 20px; 
+    z-index: 1000; 
+    transition: height 0.3s ease, bottom 0.3s ease; 
+    overflow: hidden; 
+    height: 60px; 
+}
+
+.recent-books-header {
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.recent-books-header h4 {
+    margin: 0; 
+    font-size: 18px; 
+    color: #333;
+}
+
+.recent-books-content {
+    display: flex; 
+    flex-wrap: wrap; 
+    margin-top: 10px;
+}
+
+.recent-books-content ul {
+    list-style: none; 
+    padding: 0; 
+    margin: 0;
+    display: flex; 
+    flex-wrap: wrap;
+}
+
+.recent-books-content li {
+    margin: 5px; 
+}
+
+.recent-books-content img {
+    border-radius: 8px; 
+    display: block; 
+}
+
+.recent-books-container.expanded {
+    padding: 25px;
+    height: 250px; 
+    bottom: 60px;
+}
 </style>
 </head>
 <body>
@@ -208,10 +269,8 @@
 					<form action="../book/list.do" method="post" id="searchForm">
 						<div class="search-input">
 							<input type="text" placeholder="Type Something" id="searchText"
-								name="search" onkeypress="handle(event)" />
+								name="search" onkeypress="handle(event)"/>
 							<button type="submit" class="fa fa-search" style="border:none; background:transparent"></button>
-							
-							<!-- 변경된 부분 -->
 						</div>
 					</form>
 				</div>
@@ -229,10 +288,10 @@
 								<br>
 							</h3>
 							<div class="owl-features owl-carousel">
-								<c:forEach var="vo" items="${nList}">
+								<c:forEach var="vo" items="${hList}">
 									<div class="item">
 										<div class="thumb">
-											<a href="../book/detail.do?bno=${vo.bno }" class="thumb-link">
+											<a href="../book/cookie.do?bno=${vo.bno }" class="thumb-link">
 												<img src="${vo.cover }" alt=""
 												style="width: 220px; height: 300px;">
 											</a> <span
@@ -271,7 +330,7 @@
 									<div class="col-lg-3 col-sm-6" style="text-align: center;">
 										<div class="item">
 											<div class="thumb">
-												<a href="../book/detail.do?bno=${vo.bno }"
+												<a href="../book/cookie.do?bno=${vo.bno }"
 													class="thumb-link"> <img src="${vo.cover }"
 													alt="${vo.btitle }" style="width: 200px; height: 250px;">
 												</a>
@@ -322,6 +381,22 @@
 			</nav>
 		</div>
 	</div>
-	<!-- ***** Live Stream End ***** -->
+	<div class="recent-books-container">
+    <div class="recent-books-header" onclick="toggleRecentBooks()">
+        <h4>최근 본 도서</h4>
+        <span class="toggle-icon">+</span>
+    </div>
+    <div class="recent-books-content">
+        <ul>
+            <c:forEach var="vo" items="${cList}">
+                <li>
+                    <figure><a href="../book/cookie.do?bno=${vo.bno}">
+                        <img class="radius-10 btmspace-10" src="${vo.cover}" style="width: 60px; height: 80px;"></a>
+                    </figure>
+                </li>
+            </c:forEach>
+        </ul>
+    </div>
+</div>
 </body>
 </html>

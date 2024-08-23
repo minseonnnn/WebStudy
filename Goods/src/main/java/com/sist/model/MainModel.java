@@ -5,7 +5,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.sist.controller.RequestMapping;
 
-import com.sist.controller.*;
 
 public class MainModel {
 	@RequestMapping("main/main.do")
